@@ -1,7 +1,10 @@
 ### 🚧In Progress🚧
 * **Implementing a [variable injection system](https://github.com/jtalborough/rools/tree/script-variable-population) and [npm package tools](https://github.com/jtalborough/rools/tree/package-tools/package-tools) inspired by [jtalborough](@jtalborough)**
+* **This project will most likely be merged into [Roo Code Memory Bank](https://github.com/GreatScottyMac/roo-code-memory-bank) as a major update.**
+
 <br>
 <br>
+
 <div align="center">
   
 ☢️☢️☢️ Footgun in Use ☢️☢️☢️

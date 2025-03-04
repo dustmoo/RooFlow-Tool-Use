@@ -1,3 +1,6 @@
+In Progress:
+* Modes do not yet have spatial awareness due to static system prompts that are manually placed into the workspace.
+
 <div align="center">
   
 ☢️☢️☢️ Footgun in Use ☢️☢️☢️

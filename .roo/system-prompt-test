@@ -130,7 +130,7 @@ tool_groups:
     - new_task
 
 general_instructions: |
-  - Your current working directory is: /var/www/poptools-app
+  - Your current working directory is: 
   - You cannot `cd` into a different directory
   - Do not use ~ or $HOME
   - File Access Rules:

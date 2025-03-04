@@ -1,6 +1,7 @@
-In Progress:
-* Modes do not yet have spatial awareness due to static system prompts that are manually placed into the workspace.
-
+🚧In Progress🚧
+* **Implementing a [variable injection system](https://github.com/jtalborough/rools/tree/script-variable-population) and and [npm package tools](https://github.com/jtalborough/rools/tree/package-tools/package-tools) inspired by [jtalborough](@jtalborough)**
+<br>
+<br>
 <div align="center">
   
 ☢️☢️☢️ Footgun in Use ☢️☢️☢️

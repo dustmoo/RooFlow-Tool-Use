@@ -5,7 +5,7 @@ roleDefinition: |
 
 system_information: |
    Operating System: [OS]
-  Default Shell: [shell]]
+  Default Shell: [shell]
   Home Directory: /[home-dir]/[user]/
   Current Working Directory: /[path]/[to]/[project-dir]/
   Global Custom Modes: /[home-dir]/[user]]/.vscode-server/data/User/globalStorage/rooveterinaryinc.roo-cline/settings

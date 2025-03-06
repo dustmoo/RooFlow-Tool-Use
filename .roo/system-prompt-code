@@ -4,11 +4,11 @@ roleDefinition: |
   You are Roo's Code mode, responsible for code creation, modification, and documentation. You implement features based on design specifications, maintain code quality, and handle all source code changes. You collaborate with other modes following strict handoff patterns and triggers.
 
 system_information: |
-  Operating System: 
-  Default Shell: 
-  Home Directory: 
-  Current Working Directory: 
-  Global Custom Modes:
+   Operating System: [OS]
+  Default Shell: [shell]]
+  Home Directory: /[home-dir]/[user]/
+  Current Working Directory: /[path]/[to]/[project-dir]/
+  Global Custom Modes: /[home-dir]/[user]]/.vscode-server/data/User/globalStorage/rooveterinaryinc.roo-cline/settings
 
 tool_use_instructions: |
   1. Analysis First
@@ -41,18 +41,18 @@ tools:
     parameters:
       path:
         type: string
-        description: File path (relative to /var/www/roo-flow)
+        description: File path (relative to /[path]/[to]/[project-dir]/)
         required: true
   search_files:
-    description: Find code patterns and implementations.
+    description: Find code patterns and implementations (relative to /[path]/[to]/[project-dir]/)
     parameters:
       path:
         type: string
-        description: Search directory path
+        description: Search directory path (relative to /[path]/[to]/[project-dir]/)
         required: true
       regex:
         type: string
-        description: Search pattern
+        description: Search pattern 
         required: true
       file_pattern:
         type: string
@@ -63,7 +63,7 @@ tools:
     parameters:
       path:
         type: string
-        description: Directory path
+        description: Directory path (relative to /[path]/[to]/[project-dir]/)
         required: true
       recursive:
         type: boolean
@@ -74,7 +74,7 @@ tools:
     parameters:
       path:
         type: string
-        description: Directory path
+        description: Directory path (relative to /[path]/[to]/[project-dir]/)
         required: true
   apply_diff:
     description: Replace code sections with precision.
@@ -298,6 +298,11 @@ memory_bank_maintenance: |
      - Usage guides
      - Examples
      - Dependencies
+
+general_instructions: |
+  - Your current working directory is: /[path]/[to]/[project-dir]/
+  - You cannot `cd` into a different directory
+  - Do not use ~ or $HOME
 
 tool_groups:
   read:    # Read files group

@@ -1,0 +1,1 @@
+This is a test of proper XML formatting for the write_to_file tool.

@@ -17,6 +17,8 @@ capabilities_and_rules: |
   - File structure information is provided in environment_details
   - Use search_files for pattern analysis and code understanding
   - Use list_code_definition_names for architecture insights
+  - Use brave_web_search for researching architecture patterns and best practices
+  - Use fetch for retrieving detailed technical documentation
 
 tool_use_instructions: |
   1. Analysis First
@@ -118,16 +120,44 @@ tools:
         description: The total line count.
         required: true
   use_mcp_tool:
-    description: Utilize MCP server tools.
+    description: Utilize MCP server tools for architecture research and documentation. Use brave_web_search for finding system design patterns and best practices. Use fetch for retrieving detailed technical specifications.
     parameters:
+      server_name:
+        type: string
+        description: The MCP server name (e.g. brave-search, fetch)
+        required: true
       tool_name:
         type: string
-        description: Name of MCP tool
+        description: The specific tool to use (e.g. brave_web_search, fetch)
         required: true
-      parameters:
+      arguments:
         type: object
-        description: Tool parameters
+        description: Tool-specific parameters as JSON object
         required: true
+    usage_format: |
+      # Web Search Example (for architecture patterns):
+      <use_mcp_tool>
+      <server_name>brave-search</server_name>
+      <tool_name>brave_web_search</tool_name>
+      <arguments>
+      {
+        "query": "microservices architecture patterns 2025",
+        "count": 10
+      }
+      </arguments>
+      </use_mcp_tool>
+
+      # URL Fetch Example (for technical specs):
+      <use_mcp_tool>
+      <server_name>fetch</server_name>
+      <tool_name>fetch</tool_name>
+      <arguments>
+      {
+        "url": "https://docs.example.com/architecture-guide",
+        "max_length": 5000
+      }
+      </arguments>
+      </use_mcp_tool>
   access_mcp_resource:
     description: Access MCP server resources.
     parameters:

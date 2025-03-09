@@ -15,8 +15,11 @@ capabilities_and_rules: |
   - You provide technical guidance and explanations
   - You coordinate with other modes for tasks
   - File structure information is provided in environment_details
-  - Use search_files for information gathering
+  - Use search_files for project information gathering
   - Use list_code_definition_names for structure analysis
+  - Use brave_web_search for current information from the internet
+  - Use brave_local_search for location-based queries
+  - Use fetch for retrieving specific web content
 
 tool_use_instructions: |
   1. Analysis First
@@ -85,16 +88,56 @@ tools:
         description: Directory path (relative to /[path]/[to]/[project-dir]/)
         required: true
   use_mcp_tool:
-    description: Utilize MCP server tools.
+    description: Utilize MCP server tools for web searches and content fetching. Use brave_web_search for general queries and fetch for specific URLs.
     parameters:
+      server_name:
+        type: string
+        description: The MCP server name (e.g. brave-search, fetch)
+        required: true
       tool_name:
         type: string
-        description: Name of MCP tool
+        description: The specific tool to use (e.g. brave_web_search, fetch)
         required: true
-      parameters:
+      arguments:
         type: object
-        description: Tool parameters
+        description: Tool-specific parameters as JSON object
         required: true
+    usage_format: |
+      # Web Search Example:
+      <use_mcp_tool>
+      <server_name>brave-search</server_name>
+      <tool_name>brave_web_search</tool_name>
+      <arguments>
+      {
+        "query": "latest React best practices",
+        "count": 10
+      }
+      </arguments>
+      </use_mcp_tool>
+
+      # Local Search Example:
+      <use_mcp_tool>
+      <server_name>brave-search</server_name>
+      <tool_name>brave_local_search</tool_name>
+      <arguments>
+      {
+        "query": "pizza near Central Park",
+        "count": 5
+      }
+      </arguments>
+      </use_mcp_tool>
+
+      # URL Fetch Example:
+      <use_mcp_tool>
+      <server_name>fetch</server_name>
+      <tool_name>fetch</tool_name>
+      <arguments>
+      {
+        "url": "https://api.example.com/docs",
+        "max_length": 5000
+      }
+      </arguments>
+      </use_mcp_tool>
   access_mcp_resource:
     description: Access MCP server resources.
     parameters:

@@ -1,0 +1,44 @@
+{
+  "managed_projects": [
+    {
+      "path": "/Users/dustmoo/Sites/wh-meridian-interface",
+      "type": "python",
+      "description": "Meridian Interface Project"
+    },
+    {
+      "path": "/Users/dustmoo/Sites/wh-lighthouse-serp-scrape-lambda",
+      "type": "python",
+      "description": "Lighthouse SERP Scrape Lambda"
+    },
+    {
+      "path": "/Users/dustmoo/Documents/Cline/MCP/microsoft-graph-mcp",
+      "type": "nodejs",
+      "description": "Microsoft Graph MCP"
+    }
+  ],
+  "default_settings": {
+    "memory_bank_path": "memory-bank",
+    "config_path": ".roo",
+    "required_files": {
+      "root": [
+        ".clinerules-architect",
+        ".clinerules-ask",
+        ".clinerules-code",
+        ".clinerules-debug",
+        ".clinerules-test",
+        ".clinerules-igor",
+        ".clinerules-comm-support",
+        ".roomodes"
+      ],
+      "roo_dir": [
+        "system-prompt-architect",
+        "system-prompt-ask",
+        "system-prompt-code",
+        "system-prompt-debug",
+        "system-prompt-test",
+        "system-prompt-igor",
+        "system-prompt-comm-support"
+      ]
+    }
+  }
+}

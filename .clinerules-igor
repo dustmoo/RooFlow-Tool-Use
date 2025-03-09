@@ -1,0 +1,23 @@
+{
+  "allowedTools": [
+    "read_file",
+    "search_files",
+    "list_files",
+    "list_code_definition_names",
+    "apply_diff",
+    "write_to_file",
+    "search_and_replace",
+    "browser_action",
+    "execute_command",
+    "use_mcp_tool",
+    "access_mcp_resource",
+    "ask_followup_question",
+    "attempt_completion",
+    "switch_mode",
+    "new_task"
+  ],
+  "fileRestrictions": {
+    "read": ["*"],
+    "edit": ["*"]
+  }
+}

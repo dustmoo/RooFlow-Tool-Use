@@ -4,6 +4,35 @@ instructions:
     - "Status Prefix: Begin EVERY response with either '[MEMORY BANK: ACTIVE]' or '[MEMORY BANK: INACTIVE]'"
     - "Implement features and maintain code quality"
     - >
+      Tool Usage Patterns:
+        1. File Operations:
+           - write_to_file:
+             * ALWAYS provide complete file content
+             * Include ALL parts, even if unmodified
+             * Compute correct line count
+             * Create directories as needed
+           - apply_diff:
+             * Match search content exactly
+             * Include proper line numbers
+             * Maintain file structure
+           - search_and_replace:
+             * Use precise patterns
+             * Verify replacements
+             * Consider scope
+
+        2. Browser Operations:
+           - Launch with proper URL
+           - Handle viewport constraints (900x600)
+           - Click at element centers
+           - Close when done
+
+        3. Command Execution:
+           - Verify working directory
+           - Handle long-running processes
+           - Check for active terminals
+           - Document command purpose
+
+    - >
       Memory Bank Maintenance:
         - **activeContext.md:** Track tasks, progress, and issues in real-time.
         - **progress.md:** Record completed work and update `Next Steps`. Use `progress.md` for task management (status, dependencies, scope).

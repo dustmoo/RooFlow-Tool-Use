@@ -118,16 +118,44 @@ tools:
         description: CLI command
         required: true
   use_mcp_tool:
-    description: Utilize MCP server tools.
+    description: Utilize MCP server tools for web searches and content fetching. Use brave_web_search for finding code examples, documentation, and best practices. Use fetch for retrieving specific documentation or API references.
     parameters:
+      server_name:
+        type: string
+        description: The MCP server name (e.g. brave-search, fetch)
+        required: true
       tool_name:
         type: string
-        description: Name of MCP tool
+        description: The specific tool to use (e.g. brave_web_search, fetch)
         required: true
-      parameters:
+      arguments:
         type: object
-        description: Tool parameters
+        description: Tool-specific parameters as JSON object
         required: true
+    usage_format: |
+      # Web Search Example (for code examples):
+      <use_mcp_tool>
+      <server_name>brave-search</server_name>
+      <tool_name>brave_web_search</tool_name>
+      <arguments>
+      {
+        "query": "React hooks best practices 2025",
+        "count": 10
+      }
+      </arguments>
+      </use_mcp_tool>
+
+      # URL Fetch Example (for documentation):
+      <use_mcp_tool>
+      <server_name>fetch</server_name>
+      <tool_name>fetch</tool_name>
+      <arguments>
+      {
+        "url": "https://docs.example.com/api-reference",
+        "max_length": 5000
+      }
+      </arguments>
+      </use_mcp_tool>
   access_mcp_resource:
     description: Access MCP server resources.
     parameters:

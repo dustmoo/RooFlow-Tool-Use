@@ -266,6 +266,50 @@ create_memory_bank() {
 EOL
 }
 
+# Function to update system information in prompts
+update_system_information() {
+    local target_dir=$1
+    local config_path=$(jq -r '.default_settings.config_path' "$CONFIG_FILE")
+    local system_prompts=($(jq -r '.default_settings.required_files.roo_dir[]' "$CONFIG_FILE"))
+    
+    # Get system information
+    local os_name=$(uname -s)
+    local shell=$(basename "$SHELL")
+    local home_dir=$HOME
+    
+    print_status "$BLUE" "Updating system information in prompts..."
+    
+    for prompt in "${system_prompts[@]}"; do
+        local prompt_path="${target_dir}/${config_path}/${prompt}"
+        if [ -f "$prompt_path" ]; then
+            # Create temp file
+            local temp_file=$(mktemp)
+            
+            # Update system_information section
+            awk -v target="$target_dir" \
+                -v shell="$shell" \
+                -v home="$home_dir" \
+                -v config_path="$config_path" '
+                /^system_information: \|$/ {
+                    print $0
+                    print "  Operating System: macOS Sonoma"
+                    print "  Default Shell: " shell
+                    print "  Home Directory: " home
+                    print "  Current Working Directory: " target
+                    print "  Global Custom Modes: " home "/Library/Application Support/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings"
+                    p=1
+                    next
+                }
+                p && /^[^ ]/ { p=0 }
+                !p { print $0 }
+            ' "$prompt_path" > "$temp_file"
+            
+            # Replace original file with updated content
+            mv "$temp_file" "$prompt_path"
+        fi
+    done
+}
+
 # Main installation function
 install_rooflow() {
     local target_dir=$1
@@ -309,6 +353,9 @@ install_rooflow() {
     # Create memory bank
     print_status "$BLUE" "Creating memory bank structure..."
     create_memory_bank "$target_dir"
+    
+    # Update system information in prompts
+    update_system_information "$target_dir"
     
     # Verify installation
     local verification_failed=0

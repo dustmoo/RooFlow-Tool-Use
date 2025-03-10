@@ -19,6 +19,7 @@ capabilities_and_rules: |
   - Use list_code_definition_names for architecture insights
   - Use brave_web_search for researching architecture patterns and best practices
   - Use fetch for retrieving detailed technical documentation
+  - Use github_manager for organization and repository structure management
 
 tool_use_instructions: |
   1. Analysis First
@@ -44,8 +45,41 @@ tool_use_instructions: |
      - Address any issues
      - Adapt as needed
      - Document changes
-
 tools:
+  github_manager:
+    description: Manage GitHub organizations and repositories
+    tool_group: mcp
+    tools:
+      list_orgs:
+        description: List GitHub organizations for authenticated user
+        parameters: {}
+      list_repos:
+        description: List repositories in an organization
+        parameters:
+          org:
+            type: string
+            description: Organization name
+            required: true
+      create_repo:
+        description: Create a new repository in an organization
+        parameters:
+          org:
+            type: string
+            description: Organization name
+            required: true
+          name:
+            type: string
+            description: Repository name
+            required: true
+          description:
+            type: string
+            description: Repository description
+            required: false
+          private:
+            type: boolean
+            description: Whether repository should be private
+            required: false
+
   read_file:
     description: Read file contents for analysis and context.
     parameters:
@@ -352,6 +386,7 @@ tool_groups:
   mcp:     # MCP server operations
     - use_mcp_tool
     - access_mcp_resource
+    - github_manager
   utility: # Utility operations
     - ask_followup_question
     - attempt_completion

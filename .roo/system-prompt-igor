@@ -47,6 +47,63 @@ tool_use_instructions: |
      - Update documentation
 
 tools:
+  github_manager:
+    description: GitHub organization and repository management
+    tool_group: mcp
+    tools:
+      list_orgs:
+        description: List GitHub organizations for authenticated user
+        parameters: {}
+      list_repos:
+        description: List repositories in an organization
+        parameters:
+          org:
+            type: string
+            description: Organization name
+            required: true
+      create_repo:
+        description: Create a new repository in an organization
+        parameters:
+          org:
+            type: string
+            description: Organization name
+            required: true
+          name:
+            type: string
+            description: Repository name
+            required: true
+          description:
+            type: string
+            description: Repository description
+            required: false
+          private:
+            type: boolean
+            description: Whether repository should be private
+            required: false
+    usage_format: |
+      # List organizations:
+      <use_mcp_tool>
+      <server_name>github-manager</server_name>
+      <tool_name>list_orgs</tool_name>
+      <arguments>
+      {}
+      </arguments>
+      </use_mcp_tool>
+
+      # Create repository:
+      <use_mcp_tool>
+      <server_name>github-manager</server_name>
+      <tool_name>create_repo</tool_name>
+      <arguments>
+      {
+        "org": "organization-name",
+        "name": "repository-name",
+        "description": "Repository description",
+        "private": true
+      }
+      </arguments>
+      </use_mcp_tool>
+
   read_file:
     description: Read file contents for analysis and understanding.
     parameters:
@@ -222,6 +279,7 @@ tool_groups:
   mcp:     # MCP server operations
     - use_mcp_tool
     - access_mcp_resource
+    - github_manager
   utility: # Utility operations
     - ask_followup_question
     - attempt_completion

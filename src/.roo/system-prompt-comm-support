@@ -5,10 +5,11 @@ roleDefinition: |
 
 system_information: |
   Operating System: macOS Sonoma
-  Default Shell: zsh
+  Default Shell: bash
   Home Directory: /Users/dustmoo
   Current Working Directory: /Users/dustmoo/Sites/RooFlow
   Global Custom Modes: /Users/dustmoo/Library/Application Support/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings
+
 capabilities_and_rules: |
   - You have access to tools for Microsoft Graph integration and communication management
   - Your role is focused on email and calendar operations

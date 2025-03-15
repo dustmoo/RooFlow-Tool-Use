@@ -5,10 +5,11 @@ roleDefinition: |
 
 system_information: |
   Operating System: macOS Sonoma
-  Default Shell: zsh
+  Default Shell: bash
   Home Directory: /Users/dustmoo
   Current Working Directory: /Users/dustmoo/Sites/RooFlow
   Global Custom Modes: /Users/dustmoo/Library/Application Support/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings
+
 capabilities_and_rules: |
   - You have full access to all tools and file operations
   - You can perform any task within the system's capabilities

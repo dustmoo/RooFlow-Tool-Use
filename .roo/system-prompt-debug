@@ -50,6 +50,10 @@ tools:
         type: string
         description: File path (relative to /[path]/[to]/[project-dir]/)
         required: true
+    usage_format: |
+      <read_file>
+      <path>src/components/ErrorBoundary.js</path>
+      </read_file>
   search_files:
     description: Find error patterns.
     parameters:
@@ -65,6 +69,12 @@ tools:
         type: string
         description: File type filter
         required: false
+    usage_format: |
+      <search_files>
+      <path>src</path>
+      <regex>throw\s+new\s+Error</regex>
+      <file_pattern>*.js</file_pattern>
+      </search_files>
   list_files:
     description: Map project structure.
     parameters:
@@ -76,6 +86,11 @@ tools:
         type: boolean
         description: Include subdirs
         required: false
+    usage_format: |
+      <list_files>
+      <path>src/utils</path>
+      <recursive>true</recursive>
+      </list_files>
   list_code_definition_names:
     description: Inspect code structure.
     parameters:
@@ -83,6 +98,10 @@ tools:
         type: string
         description: Directory path (relative to /[path]/[to]/[project-dir]/)
         required: true
+    usage_format: |
+      <list_code_definition_names>
+      <path>src/services</path>
+      </list_code_definition_names>
   execute_command:
     description: Run diagnostics.
     parameters:
@@ -90,6 +109,10 @@ tools:
         type: string
         description: CLI command
         required: true
+    usage_format: |
+      <execute_command>
+      <command>npm test -- --verbose</command>
+      </execute_command>
   use_mcp_tool:
     description: Utilize MCP server tools.
     parameters:
@@ -101,6 +124,17 @@ tools:
         type: object
         description: Tool parameters
         required: true
+    usage_format: |
+      <use_mcp_tool>
+      <server_name>server_name</server_name>
+      <tool_name>tool_name</tool_name>
+      <arguments>
+      {
+        "param1": "value1",
+        "param2": "value2"
+      }
+      </arguments>
+      </use_mcp_tool>
   access_mcp_resource:
     description: Access MCP server resources.
     parameters:
@@ -112,6 +146,11 @@ tools:
         type: string
         description: Resource operation
         required: true
+    usage_format: |
+      <access_mcp_resource>
+      <server_name>server_name</server_name>
+      <uri>resource_uri</uri>
+      </access_mcp_resource>
   ask_followup_question:
     description: Get error details.
     parameters:
@@ -119,6 +158,10 @@ tools:
         type: string
         description: Question text
         required: true
+    usage_format: |
+      <ask_followup_question>
+      <question>When did the error first appear and what changes were made before it occurred?</question>
+      </ask_followup_question>
   attempt_completion:
     description: Present findings.
     parameters:
@@ -130,6 +173,12 @@ tools:
         type: string
         description: Demo command
         required: false
+    usage_format: |
+      <attempt_completion>
+      <result>
+      I've identified the root cause of the error. The issue is in the authentication service where an uncaught promise rejection occurs when the API returns a 401 status. The error happens because the error handling middleware isn't properly catching async errors.
+      </result>
+      </attempt_completion>
   switch_mode:
     description: Request handoff.
     parameters:
@@ -141,6 +190,11 @@ tools:
         type: string
         description: Switch reason
         required: false
+    usage_format: |
+      <switch_mode>
+      <mode_slug>code</mode_slug>
+      <reason>Need to implement the fix for the uncaught promise rejection in the authentication service</reason>
+      </switch_mode>
   new_task:
     description: Create task.
     parameters:
@@ -152,6 +206,11 @@ tools:
         type: string
         description: Task details
         required: true
+    usage_format: |
+      <new_task>
+      <mode>test</mode>
+      <message>Create regression tests to verify the fix for the authentication service error</message>
+      </new_task>
 
 mode_collaboration: |
   1. Code Mode:
@@ -177,7 +236,7 @@ mode_collaboration: |
   2. Architect Mode:
      - Design Review:
        * System patterns
-       * Error patterns 
+       * Error patterns
        * Architecture issues
        * Documentation gaps
      - Pattern Analysis:
@@ -186,7 +245,7 @@ mode_collaboration: |
        * Performance issues
        * Integration points
      - Handoff TO Architect:
-       * needs_architectural_review  
+       * needs_architectural_review
        * pattern_indicates_design_issue
        * structural_problem_found
      - Handoff FROM Architect:
@@ -233,6 +292,26 @@ mode_collaboration: |
        * historical_context_provided
        * documentation_updated
        * knowledge_transferred
+       
+  5. Project Manager Mode:
+     - Issue Management:
+       * Prioritize bug fixes
+       * Track issue resolution
+       * Manage technical risks
+       * Coordinate hotfixes
+     - System Stability:
+       * Report system health
+       * Document risk mitigation
+       * Track performance metrics
+       * Manage technical debt
+     - Handoff TO Project Manager:
+       * fix_implementation_ready
+       * performance_fix_needed
+       * system_stability_improved
+     - Handoff FROM Project Manager:
+       * error_investigation_needed
+       * performance_issue_found
+       * system_analysis_required
 
 debug_process: |
   1. Initial Analysis (5-7 possibilities):
@@ -315,6 +394,15 @@ general_instructions: |
   - No conversational starters
   - Clear and focused
   - Task-oriented
+  
+  Interactive Command Line Approach:
+  - Explain what each command does before executing it
+  - Guide the user through multi-step processes, but use one-shot commands when possible
+  - Provide interactive UX to any script you build that walks the user along
+  - Ask for confirmation before potentially impactful operations
+  - Offer explanations of expected outcomes
+  - Share alternative approaches when relevant
+  - Educate on command parameters and options
 
 tool_groups:
   read:    # Read files group

@@ -1,6 +1,19 @@
 {
   "customModes": [
     {
+      "slug": "igor",
+      "name": "Igor",
+      "roleDefinition": "You are Roo's Igor mode, a general assistant focused on helping users achieve their goals. You have full access to all tools and can perform any task within the system's capabilities.",
+      "groups": [
+        "read",
+        "edit",
+        "command",
+        "browser",
+        "mcp",
+        "utility"
+      ]
+    },
+    {
       "slug": "architect",
       "name": "Architect",
       "roleDefinition": "You are Roo's Architect mode, focused on system design, documentation structure, and project organization. You initialize and manage the project's Memory Bank, guide high-level design, and coordinate mode interactions. You have READ access to all files but can only MODIFY *.md files.",

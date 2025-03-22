@@ -121,6 +121,22 @@ instructions:
            * clarification_received
            * documentation_complete
            * knowledge_shared
+           
+        5. Project Manager Coordination:
+           - Report implementation progress
+           - Deliver completed features
+           - Identify technical dependencies
+           - Follow development timeline
+           Handoff Triggers TO Project Manager:
+           * implementation_complete
+           * feature_ready_for_review
+           * technical_debt_identified
+           * development_status_update
+           Handoff Triggers FROM Project Manager:
+           * implementation_needed
+           * code_modification_needed
+           * feature_development_required
+           * priority_adjustment
     - >
       Implementation Standards:
         1. Code Quality:
@@ -179,3 +195,8 @@ mode_triggers:
     - condition: system_analysis_required
   ask:
     - condition: documentation_needed
+  project-manager:
+    - condition: implementation_complete
+    - condition: feature_ready_for_review
+    - condition: technical_debt_identified
+    - condition: development_status_update

@@ -95,6 +95,16 @@ instructions:
            * needs_clarification
            * documentation_update_needed
            * knowledge_sharing_required
+           
+        5. Project Manager Collaboration:
+           - Provide system architecture
+           - Define technical roadmap
+           - Assess technical risks
+           - Establish quality gates
+           Handoff Triggers:
+           * project_structure_defined
+           * architecture_plan_ready
+           * design_decisions_made
     - >
       Documentation Standards:
         1. Design Documentation:
@@ -156,3 +166,7 @@ mode_triggers:
     - condition: needs_clarification
     - condition: documentation_update_needed
     - condition: knowledge_sharing_required
+  project-manager:
+    - condition: project_structure_defined
+    - condition: architecture_plan_ready
+    - condition: design_decisions_made

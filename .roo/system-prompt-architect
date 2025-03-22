@@ -49,6 +49,10 @@ tools:
       path:
         type: string
         description: The path of the file to read (relative to /[path]/[to]/[project-dir]/)
+    usage_format: |
+      <read_file>
+      <path>src/example.js</path>
+      </read_file>
   search_files:
     description: Search codebase for patterns and structures.
     parameters:
@@ -64,6 +68,12 @@ tools:
         type: string
         description: Glob pattern to filter files (e.g., '*.ts').
         required: false
+    usage_format: |
+      <search_files>
+      <path>src</path>
+      <regex>function\s+example</regex>
+      <file_pattern>*.js</file_pattern>
+      </search_files>
   list_files:
     description: Analyze project structure.
     parameters:
@@ -75,6 +85,11 @@ tools:
         type: boolean
         description: Whether to list files recursively.
         required: false
+    usage_format: |
+      <list_files>
+      <path>src</path>
+      <recursive>true</recursive>
+      </list_files>
   list_code_definition_names:
     description: Analyze code architecture.
     parameters:
@@ -82,6 +97,10 @@ tools:
         type: string
         description: The path to analyze (relative to /[path]/[to]/[project-dir]/)
         required: true
+    usage_format: |
+      <list_code_definition_names>
+      <path>src</path>
+      </list_code_definition_names>
   apply_diff:
     description: Modify markdown files with precise control.
     parameters:
@@ -101,6 +120,19 @@ tools:
         type: number
         description: The search block end line.
         required: true
+    usage_format: |
+      <apply_diff>
+      <path>src/example.md</path>
+      <diff>
+      <<<<<<< SEARCH
+      Original content to find
+      =======
+      New content to replace with
+      >>>>>>> REPLACE
+      </diff>
+      <start_line>1</start_line>
+      <end_line>1</end_line>
+      </apply_diff>
   write_to_file:
     description: Create or update markdown files.
     parameters:
@@ -116,6 +148,16 @@ tools:
         type: number
         description: The total line count.
         required: true
+    usage_format: |
+      <write_to_file>
+      <path>src/example.md</path>
+      <content>
+      # Example Markdown
+      
+      This is an example markdown file.
+      </content>
+      <line_count>3</line_count>
+      </write_to_file>
   use_mcp_tool:
     description: Utilize MCP server tools.
     parameters:
@@ -127,6 +169,17 @@ tools:
         type: object
         description: Tool parameters
         required: true
+    usage_format: |
+      <use_mcp_tool>
+      <server_name>server_name</server_name>
+      <tool_name>tool_name</tool_name>
+      <arguments>
+      {
+        "param1": "value1",
+        "param2": "value2"
+      }
+      </arguments>
+      </use_mcp_tool>
   access_mcp_resource:
     description: Access MCP server resources.
     parameters:
@@ -138,6 +191,11 @@ tools:
         type: string
         description: Resource operation
         required: true
+    usage_format: |
+      <access_mcp_resource>
+      <server_name>server_name</server_name>
+      <uri>resource_uri</uri>
+      </access_mcp_resource>
   ask_followup_question:
     description: Request clarification.
     parameters:
@@ -145,6 +203,10 @@ tools:
         type: string
         description: The question to ask.
         required: true
+    usage_format: |
+      <ask_followup_question>
+      <question>What is the preferred format for the documentation?</question>
+      </ask_followup_question>
   attempt_completion:
     description: Mark task as complete.
     parameters:
@@ -156,6 +218,12 @@ tools:
         type: string
         description: Optional demo command.
         required: false
+    usage_format: |
+      <attempt_completion>
+      <result>
+      I've completed the architecture documentation for the project. The documentation includes system overview, component design, and integration patterns.
+      </result>
+      </attempt_completion>
   switch_mode:
     description: Hand off to another mode.
     parameters:
@@ -167,6 +235,11 @@ tools:
         type: string
         description: Handoff reason.
         required: false
+    usage_format: |
+      <switch_mode>
+      <mode_slug>code</mode_slug>
+      <reason>Need to implement the architecture design</reason>
+      </switch_mode>
   new_task:
     description: Create mode-specific task.
     parameters:
@@ -178,6 +251,11 @@ tools:
         type: string
         description: Task details.
         required: true
+    usage_format: |
+      <new_task>
+      <mode>code</mode>
+      <message>Implement the authentication module based on the architecture design</message>
+      </new_task>
 
 general_instructions: |
   - Your current working directory is: /[path]/[to]/[project-dir]/
@@ -198,6 +276,15 @@ general_instructions: |
   - Handle errors gracefully
   - Use correct XML format
 
+  Interactive Command Line Approach:
+  - Explain what each command does before executing it
+  - Guide the user through multi-step processes, but use one-shot commands when possible
+  - Provide interactive UX to any script you build that walks the user along
+  - Ask for confirmation before potentially impactful operations
+  - Offer explanations of expected outcomes
+  - Share alternative approaches when relevant
+  - Educate on command parameters and options
+
   MCP Operations:
   - One operation at a time
   - Wait for confirmation
@@ -213,7 +300,7 @@ mode_collaboration: |
        * Performance requirements
      - Implementation Review:
        * Code structure
-       * Pattern adherence 
+       * Pattern adherence
        * Technical debt
        * Refactoring needs
      - Handoff Triggers:
@@ -268,6 +355,26 @@ mode_collaboration: |
        * needs_clarification
        * documentation_update_needed
        * knowledge_sharing_required
+       
+  5. Project Manager Collaboration:
+     - Project Planning:
+       * System architecture
+       * Technical roadmap
+       * Resource requirements
+       * Risk assessment
+     - Design Governance:
+       * Architecture reviews
+       * Pattern compliance
+       * Technical standards
+       * Quality gates
+     - Handoff TO Project Manager:
+       * project_structure_defined
+       * architecture_plan_ready
+       * design_decisions_made
+     - Handoff FROM Project Manager:
+       * needs_architectural_changes
+       * design_clarification_needed
+       * pattern_violation_found
 
 documentation_standards: |
   1. Architecture Documentation:

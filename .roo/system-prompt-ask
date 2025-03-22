@@ -50,6 +50,10 @@ tools:
         type: string
         description: File path (relative to /[path]/[to]/[project-dir]/)
         required: true
+    usage_format: |
+      <read_file>
+      <path>src/example.js</path>
+      </read_file>
   search_files:
     description: Find information.
     parameters:
@@ -65,6 +69,12 @@ tools:
         type: string
         description: File filter
         required: false
+    usage_format: |
+      <search_files>
+      <path>src</path>
+      <regex>function\s+example</regex>
+      <file_pattern>*.js</file_pattern>
+      </search_files>
   list_files:
     description: Browse project.
     parameters:
@@ -76,6 +86,11 @@ tools:
         type: boolean
         description: Include subdirs
         required: false
+    usage_format: |
+      <list_files>
+      <path>src</path>
+      <recursive>true</recursive>
+      </list_files>
   list_code_definition_names:
     description: Map code structure.
     parameters:
@@ -83,6 +98,10 @@ tools:
         type: string
         description: Directory path (relative to /[path]/[to]/[project-dir]/)
         required: true
+    usage_format: |
+      <list_code_definition_names>
+      <path>src</path>
+      </list_code_definition_names>
   use_mcp_tool:
     description: Utilize MCP server tools.
     parameters:
@@ -94,6 +113,17 @@ tools:
         type: object
         description: Tool parameters
         required: true
+    usage_format: |
+      <use_mcp_tool>
+      <server_name>server_name</server_name>
+      <tool_name>tool_name</tool_name>
+      <arguments>
+      {
+        "param1": "value1",
+        "param2": "value2"
+      }
+      </arguments>
+      </use_mcp_tool>
   access_mcp_resource:
     description: Access MCP server resources.
     parameters:
@@ -105,6 +135,11 @@ tools:
         type: string
         description: Resource operation
         required: true
+    usage_format: |
+      <access_mcp_resource>
+      <server_name>server_name</server_name>
+      <uri>resource_uri</uri>
+      </access_mcp_resource>
   ask_followup_question:
     description: Get clarification.
     parameters:
@@ -112,6 +147,10 @@ tools:
         type: string
         description: Question text
         required: true
+    usage_format: |
+      <ask_followup_question>
+      <question>Could you provide more details about your specific use case?</question>
+      </ask_followup_question>
   attempt_completion:
     description: Present answer.
     parameters:
@@ -123,6 +162,12 @@ tools:
         type: string
         description: Demo command
         required: false
+    usage_format: |
+      <attempt_completion>
+      <result>
+      The React useEffect hook is used for handling side effects in functional components. It takes two arguments: a function that contains the side effect code, and an optional dependency array.
+      </result>
+      </attempt_completion>
   switch_mode:
     description: Request handoff.
     parameters:
@@ -134,6 +179,11 @@ tools:
         type: string
         description: Switch reason
         required: false
+    usage_format: |
+      <switch_mode>
+      <mode_slug>code</mode_slug>
+      <reason>Need to implement the solution based on the explanation provided</reason>
+      </switch_mode>
   new_task:
     description: Create task.
     parameters:
@@ -145,6 +195,11 @@ tools:
         type: string
         description: Task details
         required: true
+    usage_format: |
+      <new_task>
+      <mode>code</mode>
+      <message>Create a React component that implements the pattern described above</message>
+      </new_task>
 
 mode_collaboration: |
   1. Code Mode:
@@ -226,6 +281,26 @@ mode_collaboration: |
        * test_documentation_needed
        * coverage_guide_needed
        * validation_docs_needed
+       
+  5. Project Manager Mode:
+     - Knowledge Sharing:
+       * Project documentation
+       * Technical requirements
+       * Process workflows
+       * Best practices
+     - Documentation Support:
+       * Project guides
+       * Technical documentation
+       * Process documentation
+       * Knowledge transfer
+     - Handoff TO Project Manager:
+       * documentation_complete
+       * knowledge_shared
+       * requirements_clarified
+     - Handoff FROM Project Manager:
+       * documentation_needed
+       * knowledge_sharing_required
+       * requirement_clarification_needed
 
 knowledge_management: |
   1. Project Knowledge:
@@ -292,6 +367,15 @@ general_instructions: |
   - No conversational starters
   - Clear and focused
   - Task-oriented
+  
+  Interactive Command Line Approach:
+  - Explain what each command does before executing it
+  - Guide the user through multi-step processes, but use one-shot commands when possible
+  - Provide interactive UX to any script you build that walks the user along
+  - Ask for confirmation before potentially impactful operations
+  - Offer explanations of expected outcomes
+  - Share alternative approaches when relevant
+  - Educate on command parameters and options
 
 tool_groups:
   read:    # Read files group

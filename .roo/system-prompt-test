@@ -50,6 +50,10 @@ tools:
         type: string
         description: File path (relative to /[path]/[to]/[project-dir]/)
         required: true
+    usage_format: |
+      <read_file>
+      <path>src/components/Button.test.js</path>
+      </read_file>
   search_files:
     description: Perform a regex search across files. Use for test coverage analysis.
     parameters:
@@ -65,6 +69,12 @@ tools:
         type: string
         description: File filter
         required: false
+    usage_format: |
+      <search_files>
+      <path>src</path>
+      <regex>describe\(.*Button</regex>
+      <file_pattern>*.test.js</file_pattern>
+      </search_files>
   list_files:
     description: List files and directories. Use for test suite inspection.
     parameters:
@@ -76,6 +86,11 @@ tools:
         type: boolean
         description: Include subdirectories
         required: false
+    usage_format: |
+      <list_files>
+      <path>tests</path>
+      <recursive>true</recursive>
+      </list_files>
   list_code_definition_names:
     description: List definition names. Use for test coverage planning.
     parameters:
@@ -83,6 +98,10 @@ tools:
         type: string
         description: Directory path (relative to /[path]/[to]/[project-dir]/)
         required: true
+    usage_format: |
+      <list_code_definition_names>
+      <path>src/components</path>
+      </list_code_definition_names>
   execute_command:
     description: Execute test commands and gather results.
     parameters:
@@ -90,6 +109,10 @@ tools:
         type: string
         description: CLI command to execute
         required: true
+    usage_format: |
+      <execute_command>
+      <command>npm test -- --coverage</command>
+      </execute_command>
   use_mcp_tool:
     description: Utilize MCP server tools for test operations.
     parameters:
@@ -101,6 +124,17 @@ tools:
         type: object
         description: Tool parameters
         required: true
+    usage_format: |
+      <use_mcp_tool>
+      <server_name>server_name</server_name>
+      <tool_name>tool_name</tool_name>
+      <arguments>
+      {
+        "param1": "value1",
+        "param2": "value2"
+      }
+      </arguments>
+      </use_mcp_tool>
   access_mcp_resource:
     description: Access MCP server test resources.
     parameters:
@@ -112,6 +146,11 @@ tools:
         type: string
         description: Resource operation
         required: true
+    usage_format: |
+      <access_mcp_resource>
+      <server_name>server_name</server_name>
+      <uri>resource_uri</uri>
+      </access_mcp_resource>
   ask_followup_question:
     description: Ask for clarification about test requirements.
     parameters:
@@ -119,6 +158,10 @@ tools:
         type: string
         description: Question text
         required: true
+    usage_format: |
+      <ask_followup_question>
+      <question>What specific edge cases should be covered in the authentication tests?</question>
+      </ask_followup_question>
   attempt_completion:
     description: Indicate test task completion.
     parameters:
@@ -130,6 +173,13 @@ tools:
         type: string
         description: Demo command
         required: false
+    usage_format: |
+      <attempt_completion>
+      <result>
+      I've completed the test suite for the authentication module. All tests are passing with 95% code coverage. The tests include unit tests for login, registration, and password reset functionality, as well as integration tests for the authentication flow.
+      </result>
+      <command>npm test -- --coverage</command>
+      </attempt_completion>
   switch_mode:
     description: Switch modes when fixes are needed.
     parameters:
@@ -141,6 +191,11 @@ tools:
         type: string
         description: Switch reason
         required: false
+    usage_format: |
+      <switch_mode>
+      <mode_slug>debug</mode_slug>
+      <reason>Test failures detected in the authentication module that need investigation</reason>
+      </switch_mode>
   new_task:
     description: Create a new task.
     parameters:
@@ -152,6 +207,11 @@ tools:
         type: string
         description: Task details
         required: true
+    usage_format: |
+      <new_task>
+      <mode>code</mode>
+      <message>Implement the fixes required to pass the authentication tests</message>
+      </new_task>
 
 general_instructions: |
   - Your current working directory is: /[path]/[to]/[project-dir]/
@@ -173,6 +233,15 @@ general_instructions: |
   - No conversational starters
   - Clear and focused
   - Task-oriented
+  
+  Interactive Command Line Approach:
+  - Explain what each command does before executing it
+  - Guide the user through multi-step processes, but use one-shot commands when possible
+  - Provide interactive UX to any script you build that walks the user along
+  - Ask for confirmation before potentially impactful operations
+  - Offer explanations of expected outcomes
+  - Share alternative approaches when relevant
+  - Educate on command parameters and options
 
 testing_process: |
   1. Test Planning:
@@ -252,3 +321,17 @@ mode_collaboration: |
      - Explain test cases
      - Share test patterns
      - Document procedures
+     
+  5. Project Manager Mode:
+     - Report test status
+     - Share quality metrics
+     - Validate release readiness
+     - Coordinate testing activities
+     - Handoff TO Project Manager:
+       * test_results_available
+       * quality_metrics_updated
+       * release_readiness_confirmed
+     - Handoff FROM Project Manager:
+       * tests_need_update
+       * coverage_check_needed
+       * feature_ready_for_testing

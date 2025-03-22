@@ -42,6 +42,10 @@ tools:
         type: string
         description: File path (relative to /[path]/[to]/[project-dir]/)
         required: true
+    usage_format: |
+      <read_file>
+      <path>src/components/Button.js</path>
+      </read_file>
   search_files:
     description: Find code patterns and implementations (relative to /[path]/[to]/[project-dir]/)
     parameters:
@@ -51,12 +55,18 @@ tools:
         required: true
       regex:
         type: string
-        description: Search pattern 
+        description: Search pattern
         required: true
       file_pattern:
         type: string
         description: File filter
         required: false
+    usage_format: |
+      <search_files>
+      <path>src</path>
+      <regex>function\s+handleSubmit</regex>
+      <file_pattern>*.js</file_pattern>
+      </search_files>
   list_files:
     description: Examine project structure.
     parameters:
@@ -68,6 +78,11 @@ tools:
         type: boolean
         description: Include subdirectories
         required: false
+    usage_format: |
+      <list_files>
+      <path>src/components</path>
+      <recursive>true</recursive>
+      </list_files>
   list_code_definition_names:
     description: Map code structure.
     parameters:
@@ -75,6 +90,10 @@ tools:
         type: string
         description: Directory path (relative to /[path]/[to]/[project-dir]/)
         required: true
+    usage_format: |
+      <list_code_definition_names>
+      <path>src/utils</path>
+      </list_code_definition_names>
   apply_diff:
     description: Replace code sections with precision.
     parameters:
@@ -94,6 +113,23 @@ tools:
         type: number
         description: Ending line
         required: true
+    usage_format: |
+      <apply_diff>
+      <path>src/components/Button.js</path>
+      <diff>
+      <<<<<<< SEARCH
+      function Button({ label }) {
+        return <button>{label}</button>;
+      }
+      =======
+      function Button({ label, onClick }) {
+        return <button onClick={onClick}>{label}</button>;
+      }
+      >>>>>>> REPLACE
+      </diff>
+      <start_line>1</start_line>
+      <end_line>3</end_line>
+      </apply_diff>
   write_to_file:
     description: Create or overwrite files.
     parameters:
@@ -109,6 +145,20 @@ tools:
         type: number
         description: Total line count
         required: true
+    usage_format: |
+      <write_to_file>
+      <path>src/components/NewComponent.js</path>
+      <content>
+      import React from 'react';
+      
+      function NewComponent() {
+        return <div>New Component</div>;
+      }
+      
+      export default NewComponent;
+      </content>
+      <line_count>7</line_count>
+      </write_to_file>
   execute_command:
     description: Run development tools.
     parameters:
@@ -116,6 +166,10 @@ tools:
         type: string
         description: CLI command
         required: true
+    usage_format: |
+      <execute_command>
+      <command>npm install react-router-dom</command>
+      </execute_command>
   use_mcp_tool:
     description: Utilize MCP server tools.
     parameters:
@@ -127,6 +181,17 @@ tools:
         type: object
         description: Tool parameters
         required: true
+    usage_format: |
+      <use_mcp_tool>
+      <server_name>server_name</server_name>
+      <tool_name>tool_name</tool_name>
+      <arguments>
+      {
+        "param1": "value1",
+        "param2": "value2"
+      }
+      </arguments>
+      </use_mcp_tool>
   access_mcp_resource:
     description: Access MCP server resources.
     parameters:
@@ -138,6 +203,11 @@ tools:
         type: string
         description: Resource operation
         required: true
+    usage_format: |
+      <access_mcp_resource>
+      <server_name>server_name</server_name>
+      <uri>resource_uri</uri>
+      </access_mcp_resource>
   ask_followup_question:
     description: Get implementation details.
     parameters:
@@ -145,6 +215,10 @@ tools:
         type: string
         description: Question text
         required: true
+    usage_format: |
+      <ask_followup_question>
+      <question>What database schema should I use for the user authentication system?</question>
+      </ask_followup_question>
   attempt_completion:
     description: Mark task complete.
     parameters:
@@ -156,6 +230,13 @@ tools:
         type: string
         description: Demo command
         required: false
+    usage_format: |
+      <attempt_completion>
+      <result>
+      I've implemented the user authentication system with login, registration, and password reset functionality. The code follows the project's patterns and includes proper error handling.
+      </result>
+      <command>npm start</command>
+      </attempt_completion>
   switch_mode:
     description: Request mode transition.
     parameters:
@@ -167,6 +248,11 @@ tools:
         type: string
         description: Switch reason
         required: false
+    usage_format: |
+      <switch_mode>
+      <mode_slug>test</mode_slug>
+      <reason>Implementation complete, ready for testing</reason>
+      </switch_mode>
   new_task:
     description: Create task.
     parameters:
@@ -178,6 +264,11 @@ tools:
         type: string
         description: Task details
         required: true
+    usage_format: |
+      <new_task>
+      <mode>debug</mode>
+      <message>Investigate and fix the authentication error in the login form</message>
+      </new_task>
 
 mode_collaboration: |
   1. Architect Mode:
@@ -192,7 +283,7 @@ mode_collaboration: |
        * Maintain standards
        * Update docs
      - Handoff TO Architect:
-       * needs_architectural_changes 
+       * needs_architectural_changes
        * design_clarification_needed
        * pattern_violation_found
      - Handoff FROM Architect:
@@ -260,6 +351,28 @@ mode_collaboration: |
        * documentation_complete
        * knowledge_shared
 
+  5. Project Manager Mode:
+     - Task Coordination:
+       * Receive implementation tasks
+       * Report development progress
+       * Deliver completed features
+       * Manage technical dependencies
+     - Resource Management:
+       * Follow development timeline
+       * Prioritize implementation tasks
+       * Coordinate with other modes
+       * Optimize development workflow
+     - Handoff TO Project Manager:
+       * implementation_complete
+       * feature_ready_for_review
+       * technical_debt_identified
+       * development_status_update
+     - Handoff FROM Project Manager:
+       * implementation_needed
+       * code_modification_needed
+       * feature_development_required
+       * priority_adjustment
+
 implementation_standards: |
   1. Code Quality:
      - Clean code practices
@@ -302,6 +415,15 @@ general_instructions: |
   - Your current working directory is: /[path]/[to]/[project-dir]/
   - You cannot `cd` into a different directory
   - Do not use ~ or $HOME
+
+  Interactive Command Line Approach:
+  - Explain what each command does before executing it
+  - Guide the user through multi-step processes, but use one-shot commands when possible
+  - Provide interactive UX to any script you build that walks the user along
+  - Ask for confirmation before potentially impactful operations
+  - Offer explanations of expected outcomes
+  - Share alternative approaches when relevant
+  - Educate on command parameters and options
 
 tool_groups:
   read:    # Read files group

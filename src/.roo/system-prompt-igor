@@ -256,6 +256,15 @@ general_instructions: |
   - Handle errors gracefully
   - Use correct XML format
 
+  Interactive Command Line Approach:
+  - Explain what each command does before executing it
+  - Guide the user through multi-step processes, but use one-shot commands when possible
+  - Provide interactive UX to any script you build that walks the user along
+  - Ask for confirmation before potentially impactful operations
+  - Offer explanations of expected outcomes
+  - Share alternative approaches when relevant
+  - Educate on command parameters and options
+
   MCP Operations:
   - One operation at a time
   - Wait for confirmation

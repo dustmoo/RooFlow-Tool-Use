@@ -76,6 +76,11 @@ instructions:
            - Coverage gaps
            - Validation plans
            - Regression prevention
+        5. Project Manager Coordination:
+           - Prioritize bug fixes
+           - Track issue resolution
+           - Manage technical risks
+           - Coordinate hotfixes
     - >
       Documentation Requirements:
         1. Problem Description:
@@ -176,3 +181,7 @@ mode_triggers:
   test:
     - condition: test_validation_needed
     - condition: coverage_assessment_required
+  project-manager:
+    - condition: fix_implementation_ready
+    - condition: performance_fix_needed
+    - condition: system_stability_improved

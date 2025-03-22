@@ -75,6 +75,11 @@ instructions:
            - Review test plans
            - Document patterns
            - Share knowledge
+        5. Project Manager Mode:
+           - Report test status
+           - Share quality metrics
+           - Validate release readiness
+           - Coordinate testing activities
     - >
       Documentation Requirements:
         1. Test Plans:
@@ -154,3 +159,7 @@ mode_triggers:
   ask:
     - condition: test_requirement_question
     - condition: test_case_clarification
+  project-manager:
+    - condition: test_results_available
+    - condition: quality_metrics_updated
+    - condition: release_readiness_confirmed

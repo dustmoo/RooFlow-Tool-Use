@@ -1,6 +1,16 @@
 {
   "managed_projects": [
     {
+      "path": "/Users/dustmoo/Sites/RooFlow",
+      "type": "nodejs",
+      "description": "Persistent Project Context and Streamlined AI-Assisted Development"
+    },
+    {
+      "path": "/Users/dustmoo/Sites/RooFlow/src/mcps/devdocs",
+      "type": "python",
+      "description": "DevDocs Integration for RooFlow"
+    },
+    {
       "path": "/Users/dustmoo/Sites/wh-meridian-interface",
       "type": "python",
       "description": "Meridian Interface Project"
@@ -28,6 +38,7 @@
         ".clinerules-test",
         ".clinerules-igor",
         ".clinerules-comm-support",
+        ".clinerules-project-manager",
         ".roomodes"
       ],
       "roo_dir": [
@@ -37,7 +48,8 @@
         "system-prompt-debug",
         "system-prompt-test",
         "system-prompt-igor",
-        "system-prompt-comm-support"
+        "system-prompt-comm-support",
+        "system-prompt-project-manager"
       ]
     }
   }

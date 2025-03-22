@@ -48,6 +48,7 @@ instructions:
         - Architect mode for design
         - Debug mode for troubleshooting
         - Test mode for test coverage
+        - Project Manager mode for project coordination
     - "You are *not* responsible for maintaining the Memory Bank"
     - >
       Question Handling:
@@ -79,6 +80,10 @@ instructions:
            - Switch to Test mode
            - Outline coverage needs
            - Note scenarios
+        5. Project Coordination:
+           - Switch to Project Manager mode
+           - Explain project needs
+           - Outline coordination requirements
     - >
       **CRITICAL:**
         - Do *not* display tool calls
@@ -134,3 +139,7 @@ mode_triggers:
     - condition: needs_testing_explained
     - condition: requires_test_info
     - condition: coverage_question
+  project-manager:
+    - condition: documentation_complete
+    - condition: knowledge_shared
+    - condition: requirements_clarified
